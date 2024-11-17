@@ -1,33 +1,115 @@
-html{
+/* Reset and box-sizing */
+html {
     box-sizing: border-box;
     font-size: 100%;
 }
 
-*, *::before, *::after{
+*, *::before, *::after {
     box-sizing: inherit;
 }
 
-body{
+body, html {
     margin: 0;
     padding: 0;
-    background-color: #000000;
-    color: #ffffff;
+    font-family: Arial, sans-serif;
 }
 
-h1{
-    font-family: 'Schoolbell', cursive;
+/* Body Styling */
+body {
+    background-color: #000000; /* Dark theme background */
+    color: #ffffff; /* Default text color */
+}
+
+/* Header Styling */
+header {
+    background-color: #0073e6; /* Blue header background */
+    color: white;
     text-align: center;
+    padding: 1rem 0;
+}
+
+header h1 {
+    margin: 0;
+    font-family: 'Schoolbell', cursive;
     font-size: 2rem;
-    padding: 0 3rem;
 }
 
-#map{
-    height: 60vh;
+header p {
+    margin: 0.5rem 0 0;
+    font-size: 1rem;
 }
 
+/* Main Content Layout */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+
+/* Controls Panel */
+#controls {
+    background-color: #f4f4f4; /* Light background for contrast */
+    border: 1px solid #ccc;
+    padding: 1rem;
+    width: 90%;
+    max-width: 400px;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+#controls h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+#controls p {
+    color: #555;
+}
+
+#controls button {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #0073e6;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#controls button:hover {
+    background-color: #005bb5;
+}
+
+/* Map Styling */
+#map {
+    width: 90%;
+    height: 500px;
+    max-width: 800px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #f4f4f4;
+    border-top: 1px solid #ccc;
+    margin-top: 1rem;
+    color: #555;
+}
+
+/* Typography */
 .schoolbell-regular {
     font-family: "Schoolbell", cursive;
     font-weight: 400;
     font-style: normal;
-  }
-  
+}
