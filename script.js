@@ -1,5 +1,7 @@
 let markers = []; // Global array to store marker data
 let directionsRenderer; // To display directions
+let currentInfoWindow = null; // Track the currently opened InfoWindow
+
 
 // Example mapping of Bus Stop name to its timings
 const busTimingsMapping = {
@@ -66,15 +68,20 @@ function initMap(){
 
     
     function triggerSearch(place) {
-        // Perform your desired search or action
-        console.log('Search triggered for:', place);
 
-        // // Show the timing container after a destination is selected
-        // const timingContainer = document.getElementById("timing-container");
-        // if (timingContainer) {
-        //     timingContainer.style.display = "block"; // Show the timing container
-        // }
-    
+        // Hide the timing container before starting a new search
+        const timingContainer = document.getElementById("timing-container");
+        if (timingContainer) {
+            timingContainer.style.display = "none"; // Hide it
+        }
+
+        // Close any currently opened InfoWindow before proceeding
+        if (currentInfoWindow) {
+            currentInfoWindow.close();
+        }
+        
+        // Perform your desired search or action
+        console.log('Search triggered for:', place);    
     }
   
 
@@ -149,6 +156,12 @@ function initMap(){
 
 };
 
+function capitalizeFirstLetter(text) {
+    return text.replace(/\b\w/g, function(char) {
+      return char.toUpperCase();
+    });
+  }
+  
 
 // Function to calculate distance using Haversine formula
 function calculateDistance(lat1, lng1, lat2, lng2) {
@@ -265,10 +278,25 @@ function displayRouteDetails(distance, duration) {
 
     // Update the container with the distance and time
     detailsContainer.innerHTML = `
-        <h2>Route Details:</h2>
+        <h2><span>🗺️</span> Your Route</h2>
         <p><strong>Distance:</strong> ${distance}</p>
         <p><strong>Estimated Time:</strong> ${duration}</p>
     `;
+    // Apply styles to the container
+    detailsContainer.style.backgroundColor = "#3636e3";
+    detailsContainer.style.color = "white";
+    detailsContainer.style.padding = "15px 30px";
+    detailsContainer.style.borderRadius = "5px";
+    detailsContainer.style.fontFamily = "'Lexend', sans-serif";
+    detailsContainer.style.width = "300px"; // Set a fixed width for the rectangular shape
+    detailsContainer.style.boxSizing = "border-box"; // Ensure padding doesn't affect the width
+
+    // Remove padding above the "Route Details" heading
+    const heading = detailsContainer.querySelector("h2");
+    heading.style.marginTop = "2"; // Removes margin on top of the heading
+    
+    // Show the details container
+    detailsContainer.style.display = "block";
 }
 
 function displayBusTimings(busTimings) {
@@ -286,11 +314,11 @@ function displayBusTimings(busTimings) {
     // Create a dropdown for selecting the day type
     const daySelect = document.createElement('select');
     daySelect.id = "day-select";
-    daySelect.style.fontFamily = "'Lexend', sans-serif";  // Ensuring font is applied here
+    daySelect.style.fontFamily = "'Manrope', sans-serif";  // Ensuring font is applied here
     Object.keys(busTimings).forEach(day => {
         const option = document.createElement('option');
         option.value = day;
-        option.textContent = day.replace('_', ' ').toUpperCase();
+        option.textContent = capitalizeFirstLetter(day.replace('_', ' '));
         daySelect.appendChild(option);
     });
     timingContainer.appendChild(daySelect);
@@ -299,7 +327,7 @@ function displayBusTimings(busTimings) {
     const timeInput = document.createElement('input');
     timeInput.id = "time-input";
     timeInput.type = "time";
-    timeInput.style.fontFamily = "'Lexend', sans-serif";  // Ensuring font is applied here
+    timeInput.style.fontFamily = "'Manrope', sans-serif";  // Ensuring font is applied here
     timingContainer.appendChild(timeInput);
 
     // Create a button to show the next bus time
@@ -312,9 +340,9 @@ function displayBusTimings(busTimings) {
     };
 
     // Apply styles to the button
-    showButton.style.backgroundColor = "#000cb5";
+    showButton.style.backgroundColor = "#3636e3";
     showButton.style.color = "white";
-    showButton.style.fontFamily = "'Lexend', sans-serif";
+    showButton.style.fontFamily = "'Manrope', sans-serif";
     showButton.style.padding = "10px 15px";
     showButton.style.borderRadius = "5px";
     showButton.style.border = "none";
@@ -326,44 +354,6 @@ function displayBusTimings(busTimings) {
     // Show the timing container after a destination is selected
     timingContainer.style.display = "block";
 }
-
-
-// function displayBusTimings(busTimings) {
-//     const timingContainer = document.getElementById("timing-container");
-
-//     // Clear any previous timings
-//     timingContainer.innerHTML = '';
-
-//     // Create a dropdown for selecting the day type
-//     const daySelect = document.createElement('select');
-//     daySelect.id = "day-select";
-//     Object.keys(busTimings).forEach(day => {
-//         const option = document.createElement('option');
-//         option.value = day;
-//         option.textContent = day.replace('_', ' ').toUpperCase();
-//         daySelect.appendChild(option);
-//     });
-//     timingContainer.appendChild(daySelect);
-
-//     // Create an input for the user to enter the time
-//     const timeInput = document.createElement('input');
-//     timeInput.id = "time-input";
-//     timeInput.type = "time";
-//     timingContainer.appendChild(timeInput);
-
-//     // Create a button to show the next bus time
-//     const showButton = document.createElement('button');
-//     showButton.textContent = "Show Next Bus Time";
-//     showButton.onclick = () => {
-//         const selectedDay = daySelect.value;
-//         const selectedTime = timeInput.value;
-//         showNextBusTime(selectedDay, selectedTime, busTimings);
-//     };
-//     timingContainer.appendChild(showButton);
-
-//     // Show the timing container after a destination is selected
-//     timingContainer.style.display = "block";
-// }
 
 function showNextBusTime(day, time, busTimings) {
     // Convert time strings to comparable formats (minutes since midnight)
@@ -400,20 +390,37 @@ function displayInfoWindow(message) {
         return;
     }
 
+    // Create a cancel button
+    const cancelButton = `<button style="background-color: red; color: white; border: none; padding: 5px 10px; margin-left: 10px; cursor: pointer; border-radius: 5px;" onclick="closeInfoWindow()">Cancel</button>`;
+
+    // Create the content for the info window with a blue background and cancel button
+    const content = `
+        <div style="display: flex; align-items: center; font-size: 20px; font-weight: 400; font-family: 'Lexend', sans-serif; color: white; background-color: blue; padding: 20px; border-radius: 8px;">
+            <span>${message}</span>
+            ${cancelButton}
+        </div>
+    `;
+
+
+
     // Create an info window
     const infoWindow = new google.maps.InfoWindow({
-        content: `<div style="font-size: 14px; font-weight: bold; font-family: 'Lexend', sans-serif; color: black;">${message}</div>`,
+        content: `<div style="font-size: 20px; font-weight: 400; font-family: 'Lexend', sans-serif; color: white; background-color: #3636e3; padding: 20px; border-radius: 8px;">${message}</div>`,
     });
 
-    // Open the info window above the marker
+    // If there is a previous info window, close it
+    if (currentInfoWindow) {
+        currentInfoWindow.close();
+    }
+
+    // Open the new info window above the marker
     infoWindow.open({
         anchor: selectedBusStop.marker,
         map,
         shouldFocus: false,
     });
 
-    // Optionally close the info window after a timeout
-    setTimeout(() => {
-        infoWindow.close();
-    }, 5000); // Auto-close after 5 seconds
+    // Update the reference to the current info window
+    currentInfoWindow = infoWindow;
+
 }

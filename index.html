@@ -7,25 +7,25 @@
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend+Deca:wght@100..900&family=Lexend:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Schoolbell&display=swap" rel="stylesheet">        
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend+Deca:wght@100..900&family=Lexend:wght@100..900&family=Manrope:wght@200..800&family=Rubik:ital,wght@0,300..900;1,300..900&family=Schoolbell&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>MelBus</h1>
-    <h3 style="font-style: italic;">Connecting you to your community and the city</h3>
-    <div id="search-container" style="font-family: 'Lexend', sans-serif;">
-        <input type="text" id="destination" style="font-family: 'Lexend', sans-serif;" placeholder="Enter destination" />
-        <button onclick="findNearestMarker()" style="background-color: #ffd621; color: black; font-family: 'Lexend', sans-serif;">Find Nearest Stop</button>
+    <h1>Mel<span style="color: #ffd621;">Bus</span></h1>
+    <h3 style="font-weight: light;">Connecting you to your community and the city.</h3>
+    <div id="search-container" class="manrope-weight" style="font-family: 'Lexend', sans-serif; font-size: 16px;">
+        <input type="text" id="destination" class="manrope-weight" placeholder="Enter your destination" style="font-size: 20px;" />
+        <button onclick="findNearestMarker()" class="manrope-weight" style="background-color: #3636e3; color: white; font-size: 20px; font-weight: 600; padding: 12px 24px;">Find nearest stop</button> 
     </div>
-
+        
     <!-- Timing Container -->
-    <div id="timing-container" style="font-family: 'Lexend', sans-serif; display: none; position: absolute; background-color: white; padding: 15px; border: 2px solid white; border-radius: 8px;">
+    <div id="timing-container" class="manrope-weight" style="display: none; position: absolute; background-color: white; padding: 15px; border: 2px solid white; border-radius: 8px;">
         <div id="timing-text" style="margin-bottom: 10px; color: black">I will be at this stop at:</div>
         
         <!-- Day Type Select -->
-        <label for="day-select">Select Day Type:</label>
-        <select id="day-select" style="font-family: 'Lexend', sans-serif; margin-bottom: 10px;">
+        <label class="manrope-weight" for="day-select">Select Day Type:</label>
+        <select id="day-select" class="manrope-weight" style="margin-bottom: 10px;">
             <option value="weekday_daytime">Monday - Friday Daytime</option>
             <option value="weekday_evening">Monday - Friday Evening</option>
             <option value="saturday">Saturday</option>
@@ -34,7 +34,7 @@
 
         <!-- Time Input -->
         <label for="time-input">Select Time:</label>
-        <input type="time" id="time-input" style="font-family: 'Lexend', sans-serif; margin-bottom: 10px;"/>
+        <input type="time" id="time-input" class="manrope-weight" style="margin-bottom: 10px;"/>
 
         <!-- Placeholder for the dynamically created button -->
         <div id="button-container"></div>
