@@ -8,7 +8,7 @@ function initMap(){
     
     // Add the KML layer
     const ctaLayer = new google.maps.KmlLayer({
-        url: "https://raw.githubusercontent.com/blue-ataraxy/mel-bus/6d7c445531efff5107146a944fa2a54b34ab06f9/melbus_color.kml",
+        url: "https://raw.githubusercontent.com/blue-ataraxy/mel-bus/refs/heads/JKhamzaev-map/UI/MelBus.kml",
         map: map,
     });
 
@@ -54,7 +54,7 @@ function initMap(){
     });
 
     // Fetch and parse KML file for markers and routes
-    fetch("https://raw.githubusercontent.com/blue-ataraxy/mel-bus/6d7c445531efff5107146a944fa2a54b34ab06f9/melbus_color.kml")
+    fetch("https://raw.githubusercontent.com/blue-ataraxy/mel-bus/refs/heads/JKhamzaev-map/UI/MelBus.kml")
     .then((response) => response.text())
     .then((kmlText) => {
         const parser = new DOMParser();
