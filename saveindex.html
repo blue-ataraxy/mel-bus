@@ -1,21 +1,18 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mel Bus</title>
-    
-    <!-- Fonts -->
+    <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend+Deca:wght@100..900&family=Lexend:wght@100..900&family=Manrope:wght@200..800&family=Rubik:ital,wght@0,300..900;1,300..900&family=Schoolbell&display=swap" rel="stylesheet">
     
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="chatbot.css">
 </head>
 <body>
-    <!-- Main Content -->
     <h1>Mel<span style="color: #ffd621;">Bus</span></h1>
     <h3 style="font-weight: light;">Connecting you to your community and the city.</h3>
     <div id="search-container" class="manrope-weight" style="font-family: 'Lexend', sans-serif; font-size: 16px;">
@@ -42,36 +39,33 @@
 
         <!-- Placeholder for the dynamically created button -->
         <div id="button-container"></div>
+
     </div>
 
+
+    <!-- <div id="timing-container" style="font-family: 'Lexend', sans-serif; display: none; display: none;">
+        <label for="day-select">Select Day Type:</label>
+        <select id="day-select">
+            <option value="weekday_daytime">Monday - Friday Daytime</option>
+            <option value="weekday_evening">Monday - Friday Evening</option>
+            <option value="saturday">Saturday</option>
+            <option value="sunday">Sunday</option>
+        </select>
+        <label for="time-input">Select Time:</label>
+        <input type="time" id="time-input">
+        <button onclick="showNextBusTime()">Show Next Bus Time</button>
+    </div> {% endcomment %} -->
+        
     <div id="map"></div>
+
+    <!-- Container to display route details (distance and time) -->
     <div id="route-details"></div>
 
-    <!-- Chatbot Container -->
-    <div id="chatbot-container">
-        <div id="chatbot-header">
-            <span>Chat with MelBot</span>
-            <button id="close-chatbot">&times;</button>
-        </div>
-        <div id="chatbot-body">
-            <div id="chatbot-messages"></div>
-            <div id="chatbot-input-container" class="manhole-weight">
-                <input type="text" id="chatbot-input" class="manhole-weight" placeholder="Type a message..." />
-                <button id="chatbot-send" class="manhole-weight">Send</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Chatbot Toggle Button -->
-    <button id="chatbot-toggle">
-        <img src="MelBot.png" alt="MelBot Icon" id="chatbot-icon">
-    </button>
-
-    <!-- Scripts -->
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcIq4aT-Nh-KNjQDcSZHrn6lljZ68RHiE&loading=async&libraries=places&callback=initMap">
     </script>
+
     <script src="script.js"></script>
-    <script src="chatbot.js"></script>
+
 </body>
 </html>
