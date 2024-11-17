@@ -21,6 +21,18 @@ h1{
     padding: 0 3rem;
 }
 
+#search-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+#destination {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+}
+
 #map{
     height: 60vh;
 }

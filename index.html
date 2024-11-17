@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewpoirt" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mel Bus</title>
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,12 +13,21 @@
 </head>
 <body>
     <h1>MelBus!</h1>
+    <div id="search-container">
+        <input type="text" id="destination" placeholder="Enter destination" />
+        <button onclick="findNearestMarker()">Find Nearest Stop</button>
+    </div>
+    
     <div id="map"></div>
 
 
-    <script src="script.js"></script>
-    <script async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcIq4aT-Nh-KNjQDcSZHrn6lljZ68RHiE&loading=async&callback=initMap">
+    <script async defer
+    
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcIq4aT-Nh-KNjQDcSZHrn6lljZ68RHiE&loading=async&libraries=places&callback=initMap">
+    
     </script>
+
+    <script src="script.js"></script>
+
 </body>
 </html>
