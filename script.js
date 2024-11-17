@@ -1,6 +1,4 @@
-
 function initMap(){
-    
     // initialize map object
     map = new google.maps.Map(document.getElementById("map"), {
         zoom: 15,
@@ -8,14 +6,55 @@ function initMap(){
         mapId: '', // e.g. terrain
     });
     
-    //
+    // Add the KML layer
     const ctaLayer = new google.maps.KmlLayer({
-        url: "https://raw.githubusercontent.com/blue-ataraxy/mel-bus/refs/heads/main/melbus_test.kml",
+        url: "https://raw.githubusercontent.com/blue-ataraxy/mel-bus/6d7c445531efff5107146a944fa2a54b34ab06f9/melbus_color.kml",
         map: map,
     });
-    
-    
-    fetch("https://raw.githubusercontent.com/blue-ataraxy/mel-bus/refs/heads/main/melbus_test.kml")
+
+    // Function to update the current date and time
+    function updateCurrentTime() {
+        const now = new Date();
+        const currentDate = now.toLocaleDateString("en-US", {
+            weekday: "short", // "Sun" for Sunday
+            year: "numeric",
+            month: "short", // "Nov" for November
+            day: "numeric",
+        });
+        const currentTime = now.toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+        });
+
+        document.getElementById("current-time").textContent = `Current Date and Time: ${currentDate}, ${currentTime}`;
+    }
+
+    // Call the function initially
+    updateCurrentTime();
+
+    // Optionally, update the time every minute
+    setInterval(updateCurrentTime, 60000);
+
+    // Filter routes based on time and day
+    function filterRoutesByCurrentTime() {
+        const now = new Date();
+        const currentHour = now.getHours();
+        const currentMinutes = now.getMinutes();
+        const currentDay = now.toLocaleString("en-US", { weekday: "long" });
+
+        console.log(`Current Time: ${currentHour}:${currentMinutes}`);
+        console.log(`Current Day: ${currentDay}`);
+
+        alert(`Displaying routes for ${currentDay} at ${currentHour}:${currentMinutes}`);
+    }
+
+    // Add event listener for refresh button
+    document.getElementById("refresh-btn").addEventListener("click", () => {
+        filterRoutesByCurrentTime();
+    });
+
+    // Fetch and parse KML file for markers and routes
+    fetch("https://raw.githubusercontent.com/blue-ataraxy/mel-bus/6d7c445531efff5107146a944fa2a54b34ab06f9/melbus_color.kml")
     .then((response) => response.text())
     .then((kmlText) => {
         const parser = new DOMParser();
@@ -60,7 +99,6 @@ function initMap(){
                     strokeWeight: 4,
                 });
             }
-
         }
     })
     .catch((error) => console.error('Error loading KML file:', error));
