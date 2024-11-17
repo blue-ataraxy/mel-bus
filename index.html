@@ -50,7 +50,7 @@
     <!-- Chatbot Container -->
     <div id="chatbot-container">
         <div id="chatbot-header">
-            <span>Chat with MelBot</span>
+            <span>Chat with MelBee</span>
             <button id="close-chatbot">&times;</button>
         </div>
         <div id="chatbot-body">
@@ -64,8 +64,22 @@
 
     <!-- Chatbot Toggle Button -->
     <button id="chatbot-toggle">
-        <img src="MelBot.png" alt="MelBot Icon" id="chatbot-icon">
+        <img src="MelBot.jpg" alt="MelBot Icon" id="chatbot-icon">
     </button>
+
+
+    <!-- Slim Box Button -->
+    <div id="game-prompt" class="game-prompt" style="background-color: black;">
+        <button style="font-family:'Manhole',sans-serif;" onclick="startQuiz()">Waiting for your shuttle? Play a game!</button>
+    </div>
+
+    <!-- Quiz Container (Initially Hidden) -->
+    <div id="quiz-container" style="display: none;"></div>
+
+    <!-- Include quiz.js after this -->
+    <script src="quiz.js"></script>
+
+
 
     <!-- Scripts -->
     <script async defer

@@ -114,3 +114,173 @@ h3 {
     font-style: normal;
   }
   
+
+
+  /* Quiz Section Styles */
+#quiz-container {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #1c1c1c; /* Slightly lighter background for contrast */
+    border: 1px solid #444;
+    border-radius: 8px;
+    max-width: 500px;
+    text-align: center;
+}
+
+#quiz-container h2 {
+    font-size: 1.8rem;
+    font-family: 'Lexend Deca';
+    margin-bottom: 20px;
+}
+
+#question {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+#answers {
+    list-style: none;
+    padding: 0;
+}
+
+#answers li {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #333333;
+    color: #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+#answers li:hover {
+    background-color: #555555;
+}
+
+#next-btn {
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#next-btn:hover {
+    background-color: #005bb5;
+}
+
+#score {
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
+
+/* Leaderboard Styles */
+#leaderboard {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #444;
+    border-radius: 8px;
+    max-width: 500px;
+    text-align: center;
+}
+
+#leaderboard h2 {
+    font-size: 1.8rem;
+    font-family: 'Schoolbell', cursive;
+    margin-bottom: 20px;
+}
+
+#leaderboard-list {
+    list-style: none;
+    padding: 0;
+    font-size: 1rem;
+}
+
+#leaderboard-list li {
+    margin: 5px 0;
+    padding: 8px;
+    background-color: #333333;
+    color: #ffffff;
+    border-radius: 5px;
+    text-align: left;
+}
+
+/* Button hover effects */
+button:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+}
+
+/* Quiz Start Button */
+#start-quiz-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    z-index: 1000;
+}
+
+#start-quiz-btn:hover {
+    background-color: #005bb5;
+    transform: scale(1.1);
+}
+
+/* Slim Box Button - Game Prompt */
+.game-prompt {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #3A8CCC;
+    color: white;
+    padding: 10px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Manhole', sans-serif;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it appears above other content */
+}
+
+.game-prompt button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 15px;
+    text-align: center;
+    border-radius: 5px;
+    font-family: 'Manhole', sans-serif;
+}
+
+.game-prompt button:hover {
+    background-color: #A8DDFD;
+    color: #3A8CCC;
+}
+
+/* Make the quiz container visible when the quiz is active */
+#quiz-container {
+    position: relative;
+    background-color: #1c1c1c;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
