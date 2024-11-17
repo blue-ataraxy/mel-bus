@@ -17,6 +17,20 @@
         <input type="text" id="destination" placeholder="Enter destination" />
         <button onclick="findNearestMarker()">Find Nearest Stop</button>
     </div>
+
+    <div id="timing-container" style="display: none;">
+        <label for="day-select">Select Day Type:</label>
+        <select id="day-select">
+            <option value="weekday_daytime">Monday - Friday Daytime</option>
+            <option value="weekday_evening">Monday - Friday Evening</option>
+            <option value="saturday">Saturday</option>
+            <option value="sunday">Sunday</option>
+        </select>
+        <label for="time-input">Select Time:</label>
+        <input type="time" id="time-input">
+        <button onclick="showNextBusTime()">Show Next Bus Time</button>
+    </div>
+        
     
     <div id="map"></div>
 

@@ -2,6 +2,7 @@ let markers = []; // Global array to store marker data
 let directionsRenderer; // To display directions
 
 
+
 function initMap(){
     
     // initialize map object
@@ -52,6 +53,13 @@ function initMap(){
     function triggerSearch(place) {
         // Perform your desired search or action
         console.log('Search triggered for:', place);
+
+        // Show the timing container after a destination is selected
+        const timingContainer = document.getElementById("timing-container");
+        if (timingContainer) {
+            timingContainer.style.display = "block"; // Show the timing container
+        }
+    
     }
   
 
