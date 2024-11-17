@@ -204,7 +204,7 @@ function findNearestMarker() {
         if (nearestMarker) {
 
             selectedBusStop = nearestMarker;
-            
+
             const nearestLatLng = { lat: nearestMarker.lat, lng: nearestMarker.lng };
             
             // Display the route
@@ -277,9 +277,16 @@ function displayBusTimings(busTimings) {
     // Clear any previous timings
     timingContainer.innerHTML = '';
 
+    // Create a heading or text to inform the user
+    const timingText = document.createElement('div');
+    timingText.id = 'timing-text';
+    timingText.textContent = "I will be at this stop at:";
+    timingContainer.appendChild(timingText);
+
     // Create a dropdown for selecting the day type
     const daySelect = document.createElement('select');
     daySelect.id = "day-select";
+    daySelect.style.fontFamily = "'Lexend', sans-serif";  // Ensuring font is applied here
     Object.keys(busTimings).forEach(day => {
         const option = document.createElement('option');
         option.value = day;
@@ -292,6 +299,7 @@ function displayBusTimings(busTimings) {
     const timeInput = document.createElement('input');
     timeInput.id = "time-input";
     timeInput.type = "time";
+    timeInput.style.fontFamily = "'Lexend', sans-serif";  // Ensuring font is applied here
     timingContainer.appendChild(timeInput);
 
     // Create a button to show the next bus time
@@ -302,11 +310,60 @@ function displayBusTimings(busTimings) {
         const selectedTime = timeInput.value;
         showNextBusTime(selectedDay, selectedTime, busTimings);
     };
+
+    // Apply styles to the button
+    showButton.style.backgroundColor = "#000cb5";
+    showButton.style.color = "white";
+    showButton.style.fontFamily = "'Lexend', sans-serif";
+    showButton.style.padding = "10px 15px";
+    showButton.style.borderRadius = "5px";
+    showButton.style.border = "none";
+    showButton.style.cursor = "pointer";
+    showButton.style.marginTop = "10px";  // Adds some spacing between input and button
+
     timingContainer.appendChild(showButton);
 
     // Show the timing container after a destination is selected
     timingContainer.style.display = "block";
 }
+
+
+// function displayBusTimings(busTimings) {
+//     const timingContainer = document.getElementById("timing-container");
+
+//     // Clear any previous timings
+//     timingContainer.innerHTML = '';
+
+//     // Create a dropdown for selecting the day type
+//     const daySelect = document.createElement('select');
+//     daySelect.id = "day-select";
+//     Object.keys(busTimings).forEach(day => {
+//         const option = document.createElement('option');
+//         option.value = day;
+//         option.textContent = day.replace('_', ' ').toUpperCase();
+//         daySelect.appendChild(option);
+//     });
+//     timingContainer.appendChild(daySelect);
+
+//     // Create an input for the user to enter the time
+//     const timeInput = document.createElement('input');
+//     timeInput.id = "time-input";
+//     timeInput.type = "time";
+//     timingContainer.appendChild(timeInput);
+
+//     // Create a button to show the next bus time
+//     const showButton = document.createElement('button');
+//     showButton.textContent = "Show Next Bus Time";
+//     showButton.onclick = () => {
+//         const selectedDay = daySelect.value;
+//         const selectedTime = timeInput.value;
+//         showNextBusTime(selectedDay, selectedTime, busTimings);
+//     };
+//     timingContainer.appendChild(showButton);
+
+//     // Show the timing container after a destination is selected
+//     timingContainer.style.display = "block";
+// }
 
 function showNextBusTime(day, time, busTimings) {
     // Convert time strings to comparable formats (minutes since midnight)
