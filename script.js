@@ -57,11 +57,11 @@ function initMap(){
 
 
     const ctaLayer = new google.maps.KmlLayer({
-        url: "https://raw.githubusercontent.com/blue-ataraxy/mel-bus/refs/heads/main/melbus_test.kml",
+        url: "https://raw.githubusercontent.com/blue-ataraxy/mel-bus/refs/heads/JKhamzaev-map/UI/MelBusColor.kml",
         map: map,
     });
 
-    fetch("https://raw.githubusercontent.com/blue-ataraxy/mel-bus/refs/heads/main/melbus_test.kml")
+    fetch("https://raw.githubusercontent.com/blue-ataraxy/mel-bus/refs/heads/JKhamzaev-map/UI/MelBusColor.kml")
     .then((response) => response.text())
     .then((kmlText) => {
         const parser = new DOMParser();
@@ -76,17 +76,16 @@ function initMap(){
             const point = placemark.getElementsByTagName('Point')[0];
             if (point) {
                 const coordinatesText = point.getElementsByTagName('coordinates')[0].textContent.trim();
-                const [lng, lat] = coordinatesText.split(',').map(Number);
+                const [lng, lat] = coordinatesText.split(',').map(Number);                
                 
                 // Create a marker
                 const marker = new google.maps.Marker({
                     position: { lat, lng },
                     map: map,
-                    title: placemark.getElementsByTagName('name')[0]?.textContent || `Marker ${i + 1}`,
+                    title: placemark.getElementsByTagName('name')[0]?.textContent || `Marker ${i + 1}`
                 });
                 
                 markers.push({ marker, lat, lng }); // Save marker and coordinates
-
 
                 
             }
@@ -196,8 +195,35 @@ function calculateAndDisplayRoute(destLat, destLng, nearestLatLng) {
     directionsService.route(request, (result, status) => {
         if (status === google.maps.DirectionsStatus.OK) {
             directionsRenderer.setDirections(result);
+
+            // Extract distance and duration
+            const distance = result.routes[0].legs[0].distance.text; // Get distance
+            const duration = result.routes[0].legs[0].duration.text; // Get duration (time)
+
+            // Display the route details (distance and time)
+            displayRouteDetails(distance, duration);
         } else {
             alert("Directions request failed due to " + status);
         }
     });
+}
+
+// Function to display route details (distance and time)
+function displayRouteDetails(distance, duration) {
+    // Find or create a container to display route details
+    let detailsContainer = document.getElementById("route-details");
+    
+    if (!detailsContainer) {
+        // Create a new div if it doesn't exist
+        detailsContainer = document.createElement("div");
+        detailsContainer.id = "route-details";
+        document.body.appendChild(detailsContainer); // Append to the body or another container
+    }
+
+    // Update the container with the distance and time
+    detailsContainer.innerHTML = `
+        <h2>Route Details:</h2>
+        <p><strong>Distance:</strong> ${distance}</p>
+        <p><strong>Estimated Time:</strong> ${duration}</p>
+    `;
 }
