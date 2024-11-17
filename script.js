@@ -1,6 +1,21 @@
 let markers = []; // Global array to store marker data
 let directionsRenderer; // To display directions
 
+// Example mapping of Bus Stop name to its timings
+const busTimingsMapping = {
+    "Innovation Square": {
+        "weekday_daytime": ["08:00", "09:00"],
+        "weekday_evening": ["21:00", "22:00"]
+    },
+    "Bus stop 2": {
+        "weekday_daytime": ["08:00", "09:00"],
+        "weekday_evening": ["21:00", "22:00"]
+    },
+    // Add more bus stops and their timings here...
+};
+
+let selectedBusStop = null; // To store the nearest bus stop
+
 
 
 function initMap(){
@@ -54,11 +69,11 @@ function initMap(){
         // Perform your desired search or action
         console.log('Search triggered for:', place);
 
-        // Show the timing container after a destination is selected
-        const timingContainer = document.getElementById("timing-container");
-        if (timingContainer) {
-            timingContainer.style.display = "block"; // Show the timing container
-        }
+        // // Show the timing container after a destination is selected
+        // const timingContainer = document.getElementById("timing-container");
+        // if (timingContainer) {
+        //     timingContainer.style.display = "block"; // Show the timing container
+        // }
     
     }
   
@@ -86,14 +101,23 @@ function initMap(){
                 const coordinatesText = point.getElementsByTagName('coordinates')[0].textContent.trim();
                 const [lng, lat] = coordinatesText.split(',').map(Number);                
                 
+                const busStopName = placemark.getElementsByTagName('name')[0]?.textContent || `Marker ${i + 1}`;
+                const busTimings = busTimingsMapping[busStopName]; 
+                
                 // Create a marker
                 const marker = new google.maps.Marker({
                     position: { lat, lng },
                     map: map,
                     title: placemark.getElementsByTagName('name')[0]?.textContent || `Marker ${i + 1}`
                 });
+
+                // If bus timings exist, associate them with the marker
+                if (busTimings) {
+                    marker.busTimings = busTimings;
+                }
+
                 
-                markers.push({ marker, lat, lng }); // Save marker and coordinates
+                markers.push({ marker, lat, lng, busTimings }); // Save marker and coordinates
 
                 
             }
@@ -169,19 +193,30 @@ function findNearestMarker() {
         let minDistance = Infinity;
 
         // Find the nearest marker
-        for (const { marker, lat, lng } of markers) {
+        for (const { marker, lat, lng , busTimings } of markers) {
             const distance = calculateDistance(destLat, destLng, lat, lng);
             if (distance < minDistance) {
                 minDistance = distance;
-                nearestMarker = { marker, lat, lng };
+                nearestMarker = { marker, lat, lng , busTimings };
             }
         }
 
         if (nearestMarker) {
+
+            selectedBusStop = nearestMarker;
+            
             const nearestLatLng = { lat: nearestMarker.lat, lng: nearestMarker.lng };
             
             // Display the route
             calculateAndDisplayRoute(destLat, destLng, nearestLatLng);
+
+            // Show bus timings for the nearest stop
+            if (nearestMarker.busTimings) {
+                displayBusTimings(nearestMarker.busTimings);
+            } else {
+                alert("No bus timings available for the nearest stop.");
+            }
+
         } else {
             alert("No stops found.");
         }
@@ -235,3 +270,122 @@ function displayRouteDetails(distance, duration) {
         <p><strong>Estimated Time:</strong> ${duration}</p>
     `;
 }
+
+function displayBusTimings(busTimings) {
+    const timingContainer = document.getElementById("timing-container");
+
+    // Clear any previous timings
+    timingContainer.innerHTML = '';
+
+    // Create a dropdown for selecting the day type
+    const daySelect = document.createElement('select');
+    daySelect.id = "day-select";
+    Object.keys(busTimings).forEach(day => {
+        const option = document.createElement('option');
+        option.value = day;
+        option.textContent = day.replace('_', ' ').toUpperCase();
+        daySelect.appendChild(option);
+    });
+    timingContainer.appendChild(daySelect);
+
+    // Create an input for the user to enter the time
+    const timeInput = document.createElement('input');
+    timeInput.id = "time-input";
+    timeInput.type = "time";
+    timingContainer.appendChild(timeInput);
+
+    // Create a button to show the next bus time
+    const showButton = document.createElement('button');
+    showButton.textContent = "Show Next Bus Time";
+    showButton.onclick = () => {
+        const selectedDay = daySelect.value;
+        const selectedTime = timeInput.value;
+        showNextBusTime(selectedDay, selectedTime, busTimings);
+    };
+    timingContainer.appendChild(showButton);
+
+    // Show the timing container after a destination is selected
+    timingContainer.style.display = "block";
+}
+
+function showNextBusTime(day, time, busTimings) {
+    // Convert time strings to comparable formats (minutes since midnight)
+    const timeToMinutes = (timeStr) => {
+        const [hours, minutes] = timeStr.split(":").map(Number);
+        return hours * 60 + minutes;
+    };
+
+    const selectedTimings = busTimings[day];
+    if (!selectedTimings || selectedTimings.length === 0) {
+        displayInfoWindow("No bus timings available for the selected day.");
+        return;
+    }
+
+    const userTimeInMinutes = timeToMinutes(time);
+
+    // Sort timings in ascending order to find the next bus easily
+    const sortedTimings = selectedTimings.sort((a, b) => timeToMinutes(a) - timeToMinutes(b));
+
+    // Find the first bus timing that is later than the user-provided time
+    const nextBusTime = sortedTimings.find(busTime => timeToMinutes(busTime) > userTimeInMinutes);
+
+    if (nextBusTime) {
+        displayInfoWindow(`Next bus time: ${nextBusTime}`);
+    } else {
+        displayInfoWindow("No more bus times available after the selected time.");
+    }
+}
+
+// Helper function to display an InfoWindow on the selected marker
+function displayInfoWindow(message) {
+    if (!selectedBusStop || !selectedBusStop.marker) {
+        console.error("No selected bus stop or marker available.");
+        return;
+    }
+
+    // Create an info window
+    const infoWindow = new google.maps.InfoWindow({
+        content: `<div style="font-size: 14px; font-weight: bold;">${message}</div>`,
+    });
+
+    // Open the info window above the marker
+    infoWindow.open({
+        anchor: selectedBusStop.marker,
+        map,
+        shouldFocus: false,
+    });
+
+    // Optionally close the info window after a timeout
+    setTimeout(() => {
+        infoWindow.close();
+    }, 5000); // Auto-close after 5 seconds
+}
+
+
+// function showNextBusTime(day, time, busTimings) {
+//     // Convert time strings to comparable formats (minutes since midnight)
+//     const timeToMinutes = (timeStr) => {
+//         const [hours, minutes] = timeStr.split(":").map(Number);
+//         return hours * 60 + minutes;
+//     };
+
+//     const selectedTimings = busTimings[day];
+//     if (!selectedTimings || selectedTimings.length === 0) {
+//         alert("No bus timings available for the selected day.");
+//         return;
+//     }
+
+//     const userTimeInMinutes = timeToMinutes(time);
+
+//     // Sort timings in ascending order to find the next bus easily
+//     const sortedTimings = selectedTimings.sort((a, b) => timeToMinutes(a) - timeToMinutes(b));
+
+//     // Find the first bus timing that is later than the user-provided time
+//     const nextBusTime = sortedTimings.find(busTime => timeToMinutes(busTime) > userTimeInMinutes);
+
+//     if (nextBusTime) {
+//         alert(`Next bus time: ${nextBusTime}`);
+//     } else {
+//         alert("No more bus times available after the selected time.");
+//     }
+// }
