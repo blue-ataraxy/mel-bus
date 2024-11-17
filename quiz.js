@@ -81,6 +81,7 @@ const quiz = [
 
 let currentQuestion = 0;
 let sessionScore = 0; // Tracks the score for the current session only
+let currentUser = ""; // Global variable to store the current user's name
 
 // Start Quiz
 function startQuiz() {
@@ -143,16 +144,16 @@ function nextQuestion() {
 // End Quiz Anytime
 function endQuiz() {
     // Prompt user for name before showing leaderboard
-    const username = prompt("Enter your name:");
+    currentUser = prompt("Enter your name:");
 
     // Ensure the user enters a name
-    if (username) {
+    if (currentUser) {
         // Hide the quiz container
         document.getElementById("quiz-container").style.display = "none";
         document.getElementById("start-quiz-btn").style.display = "inline-block";
         
         // Update the leaderboard
-        updateLeaderboard(username, sessionScore);
+        updateLeaderboard(currentUser, sessionScore);
 
         // Show the leaderboard
         showLeaderboard();
@@ -174,7 +175,7 @@ function showLeaderboard() {
     const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
     
     // Get the user's rank based on their score
-    const rank = leaderboard.findIndex(entry => entry.username === prompt("Enter your name")) + 1;
+    const rank = leaderboard.findIndex(entry => entry.username === currentUser) + 1;
 
     // Display top 3 scores only
     const topScores = leaderboard.slice(0, 3);
