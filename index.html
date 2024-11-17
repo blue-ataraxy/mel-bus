@@ -3,43 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MelBus - Shuttle Tracker</title>
-    
-    <!-- Fonts -->
+    <title>Mel Bus</title>
+    <!-- Fonts and Styles -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Schoolbell&display=swap" rel="stylesheet">
-
-    <!-- Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>MelBus</h1>
-        <p>Your University Shuttle Companion</p>
-    </header>
-    
-    <main>
-        <!-- Journey Planner Controls -->
-        <div id="controls">
-            <h2>Plan Your Journey</h2>
-            <p id="current-time">Current Date and Time: Loading...</p>
-            <p>Automatically detecting routes for your current time and day...</p>
-            <button id="refresh-btn">Refresh Routes</button>
-        </div>
-        
-        <!-- Map Container -->
-        <div id="map"></div>
-    </main>
+    <h1>MelBus!</h1>
+    <div id="search-container">
+        <input type="text" id="destination" placeholder="Enter destination" />
+        <button onclick="findNearestMarker()">Find Nearest Stop</button>
+    </div>
 
-    <footer>
-        <p>&copy; 2024 MelBus. All rights reserved.</p>
-    </footer>
+    <div id="timing-container" style="display: none;">
+        <label for="day-select">Select Day Type:</label>
+        <select id="day-select">
+            <option value="weekday_daytime">Monday - Friday Daytime</option>
+            <option value="weekday_evening">Monday - Friday Evening</option>
+            <option value="saturday">Saturday</option>
+            <option value="sunday">Sunday</option>
+        </select>
+        <label for="time-input">Select Time:</label>
+        <input type="time" id="time-input">
+        <button onclick="showNextBusTime()">Show Next Bus Time</button>
+    </div>
+        
+    <div id="map"></div>
+
+    <!-- Container to display route details (distance and time) -->
+    <div id="route-details"></div>
+
+    <!-- Quiz Container -->
+    <div id="quiz-container" style="display: none;"></div>
+    <button id="start-quiz-btn" onclick="startQuiz()">Start Quiz</button>
+    
 
     <!-- Scripts -->
-    <script src="script.js"></script>
-    <script async
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcIq4aT-Nh-KNjQDcSZHrn6lljZ68RHiE&loading=async&callback=initMap">
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcIq4aT-Nh-KNjQDcSZHrn6lljZ68RHiE&loading=async&libraries=places&callback=initMap">
     </script>
+    <script src="script.js"></script>
+    <script src="quiz.js"></script>
 </body>
 </html>
