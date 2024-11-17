@@ -45,9 +45,9 @@
         <styleUrl>#icon-1899-0288D1-nodesc-highlight</styleUrl>
       </Pair>
     </StyleMap>
-    <Style id="icon-1899-DB4436-nodesc-normal">
+    <Style id="icon-1899-0F9D58-nodesc-normal">
       <IconStyle>
-        <color>ff3644db</color>
+        <color>ff589d0f</color>
         <scale>1</scale>
         <Icon>
           <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
@@ -61,9 +61,9 @@
         <text><![CDATA[<h3>$[name]</h3>]]></text>
       </BalloonStyle>
     </Style>
-    <Style id="icon-1899-DB4436-nodesc-highlight">
+    <Style id="icon-1899-0F9D58-nodesc-highlight">
       <IconStyle>
-        <color>ff3644db</color>
+        <color>ff589d0f</color>
         <scale>1</scale>
         <Icon>
           <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
@@ -77,14 +77,56 @@
         <text><![CDATA[<h3>$[name]</h3>]]></text>
       </BalloonStyle>
     </Style>
-    <StyleMap id="icon-1899-DB4436-nodesc">
+    <StyleMap id="icon-1899-0F9D58-nodesc">
       <Pair>
         <key>normal</key>
-        <styleUrl>#icon-1899-DB4436-nodesc-normal</styleUrl>
+        <styleUrl>#icon-1899-0F9D58-nodesc-normal</styleUrl>
       </Pair>
       <Pair>
         <key>highlight</key>
-        <styleUrl>#icon-1899-DB4436-nodesc-highlight</styleUrl>
+        <styleUrl>#icon-1899-0F9D58-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-1899-F9A825-nodesc-normal">
+      <IconStyle>
+        <color>ff25a8f9</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-1899-F9A825-nodesc-highlight">
+      <IconStyle>
+        <color>ff25a8f9</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-1899-F9A825-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-F9A825-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-F9A825-nodesc-highlight</styleUrl>
       </Pair>
     </StyleMap>
     <Style id="line-0F9D58-5000-nodesc-normal">
@@ -156,7 +198,7 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[Monroe & Alexander]]></name>
-        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <styleUrl>#icon-1899-F9A825-nodesc</styleUrl>
         <Point>
           <coordinates>
             -77.597853,43.14842,0
@@ -631,7 +673,7 @@
       </Placemark>
       <Placemark>
         <name>Rush Rhees Library</name>
-        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <styleUrl>#icon-1899-F9A825-nodesc</styleUrl>
         <Point>
           <coordinates>
             -77.627846,43.128641,0
@@ -640,7 +682,7 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[Monroe & Alexander]]></name>
-        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <styleUrl>#icon-1899-F9A825-nodesc</styleUrl>
         <Point>
           <coordinates>
             -77.597906,43.148436,0
@@ -649,7 +691,7 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[Park & Culver]]></name>
-        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <styleUrl>#icon-1899-F9A825-nodesc</styleUrl>
         <Point>
           <coordinates>
             -77.573143,43.146792,0
@@ -658,7 +700,7 @@
       </Placemark>
       <Placemark>
         <name>Innovation Square</name>
-        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <styleUrl>#icon-1899-F9A825-nodesc</styleUrl>
         <Point>
           <coordinates>
             -77.605244,43.154442,0
@@ -1201,7 +1243,7 @@
       </Placemark>
       <Placemark>
         <name>Rush Rhees Library</name>
-        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <styleUrl>#icon-1899-0F9D58-nodesc</styleUrl>
         <Point>
           <coordinates>
             -77.627846,43.128641,0
@@ -1210,7 +1252,7 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[Crittenden & West Henrietta]]></name>
-        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <styleUrl>#icon-1899-0F9D58-nodesc</styleUrl>
         <Point>
           <coordinates>
             -77.62772,43.10437,0
@@ -1219,7 +1261,7 @@
       </Placemark>
       <Placemark>
         <name>Jefferson Plaza</name>
-        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <styleUrl>#icon-1899-0F9D58-nodesc</styleUrl>
         <Point>
           <coordinates>
             -77.641284,43.090575,0
@@ -1228,7 +1270,7 @@
       </Placemark>
       <Placemark>
         <name>Walmart</name>
-        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <styleUrl>#icon-1899-0F9D58-nodesc</styleUrl>
         <Point>
           <coordinates>
             -77.624652,43.0801,0
