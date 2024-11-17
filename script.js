@@ -387,7 +387,7 @@ function showNextBusTime(day, time, busTimings) {
     const nextBusTime = sortedTimings.find(busTime => timeToMinutes(busTime) > userTimeInMinutes);
 
     if (nextBusTime) {
-        displayInfoWindow(`Next bus time: ${nextBusTime}`);
+        displayInfoWindow(`Next bus time: <br>${nextBusTime}`);
     } else {
         displayInfoWindow("No more bus times available after the selected time.");
     }
@@ -402,7 +402,7 @@ function displayInfoWindow(message) {
 
     // Create an info window
     const infoWindow = new google.maps.InfoWindow({
-        content: `<div style="font-size: 14px; font-weight: bold;">${message}</div>`,
+        content: `<div style="font-size: 14px; font-weight: bold; font-family: 'Lexend', sans-serif; color: black;">${message}</div>`,
     });
 
     // Open the info window above the marker
