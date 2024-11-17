@@ -2,23 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewpoirt" content="width=device-width, initial-scale=1.0">
-    <title>Mel Bus</title>
-    <!-- font -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MelBus - Shuttle Tracker</title>
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Schoolbell&display=swap" rel="stylesheet">
-    
+
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>MelBus!</h1>
-    <div id="map"></div>
+    <header>
+        <h1>MelBus</h1>
+        <p>Your University Shuttle Companion</p>
+    </header>
+    
+    <main>
+        <!-- Journey Planner Controls -->
+        <div id="controls">
+            <h2>Plan Your Journey</h2>
+            <p id="current-time">Current Date and Time: Loading...</p>
+            <p>Automatically detecting routes for your current time and day...</p>
+            <button id="refresh-btn">Refresh Routes</button>
+        </div>
+        
+        <!-- Map Container -->
+        <div id="map"></div>
+    </main>
 
+    <footer>
+        <p>&copy; 2024 MelBus. All rights reserved.</p>
+    </footer>
 
+    <!-- Scripts -->
     <script src="script.js"></script>
     <script async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcIq4aT-Nh-KNjQDcSZHrn6lljZ68RHiE&loading=async&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcIq4aT-Nh-KNjQDcSZHrn6lljZ68RHiE&loading=async&callback=initMap">
     </script>
 </body>
 </html>
