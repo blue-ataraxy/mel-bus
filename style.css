@@ -19,12 +19,16 @@ h1 {
     font-family: 'Lexend Deca', sans-serif;
     text-align: center;
     font-size: 4rem;
+    margin-bottom: 0.5rem; /* Reduce bottom margin */
 }
 
 h3 {
     font-family: 'Lexend', sans-serif;
+    
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 1.3rem;
+    margin-top: 0; /* Remove top margin */
+
 }
 
 #search-container {
@@ -57,7 +61,7 @@ h3 {
 
 #timing-text {
     font-weight: light;
-    
+
     margin-bottom: 10px;
     color: black;
 }

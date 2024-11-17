@@ -417,32 +417,3 @@ function displayInfoWindow(message) {
         infoWindow.close();
     }, 5000); // Auto-close after 5 seconds
 }
-
-
-// function showNextBusTime(day, time, busTimings) {
-//     // Convert time strings to comparable formats (minutes since midnight)
-//     const timeToMinutes = (timeStr) => {
-//         const [hours, minutes] = timeStr.split(":").map(Number);
-//         return hours * 60 + minutes;
-//     };
-
-//     const selectedTimings = busTimings[day];
-//     if (!selectedTimings || selectedTimings.length === 0) {
-//         alert("No bus timings available for the selected day.");
-//         return;
-//     }
-
-//     const userTimeInMinutes = timeToMinutes(time);
-
-//     // Sort timings in ascending order to find the next bus easily
-//     const sortedTimings = selectedTimings.sort((a, b) => timeToMinutes(a) - timeToMinutes(b));
-
-//     // Find the first bus timing that is later than the user-provided time
-//     const nextBusTime = sortedTimings.find(busTime => timeToMinutes(busTime) > userTimeInMinutes);
-
-//     if (nextBusTime) {
-//         alert(`Next bus time: ${nextBusTime}`);
-//     } else {
-//         alert("No more bus times available after the selected time.");
-//     }
-// }
